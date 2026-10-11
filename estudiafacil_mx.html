@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Herramientas gratuitas para estudiantes: calcula promedios, porcentajes, regla de tres y tablas de multiplicar.">
+<title>EstudiaFácil MX | Herramientas para estudiantes</title>
+<style>
+:root{--ink:#172033;--muted:#64748b;--bg:#f5f7fb;--card:#fff;--blue:#315efb;--line:#e5eaf3;--mint:#dff8ed}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(120deg,#182b62,#315efb);color:#fff;padding:28px 18px 38px}
+nav,main,.foot{max-width:1050px;margin:auto}nav{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:850;font-size:1.15rem;letter-spacing:-.4px}.tag{font-size:.82rem;background:#ffffff22;padding:6px 10px;border-radius:999px}
+.hero{max-width:1050px;margin:30px auto 0}.hero h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;letter-spacing:-1.5px;margin:0 0 12px}.hero p{color:#e2e9ff;max-width:620px;margin:0;font-size:1.04rem}
+main{padding:24px 16px 42px}.adnote{border:1px dashed #b8c4d9;background:#fff;border-radius:14px;text-align:center;color:var(--muted);padding:13px;margin:0 0 22px;font-size:.88rem}
+.section-title{font-size:1.45rem;margin:28px 0 6px}.sub{color:var(--muted);margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 18px #17203308}.card h3{margin:0 0 5px;font-size:1.12rem}.card p{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+label{display:block;font-size:.9rem;font-weight:650;margin:12px 0 5px}input,select{width:100%;padding:11px 12px;border:1px solid #ccd5e4;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}button{margin-top:12px;width:100%;border:0;border-radius:10px;background:var(--blue);color:#fff;padding:12px 14px;font:inherit;font-weight:750;cursor:pointer}button:hover{filter:brightness(.94)}
+.result{margin-top:12px;background:#edf2ff;border-radius:10px;padding:12px;font-weight:700;min-height:46px;overflow-wrap:anywhere}.small{font-size:.82rem;color:var(--muted);margin-top:10px}
+.navlink{color:#fff;text-decoration:none;font-weight:700;border:1px solid #ffffff66;border-radius:10px;padding:8px 12px}.account{margin-top:22px}.balance{font-size:2rem;font-weight:850;letter-spacing:-1px;color:#172033}.notice{background:#fff7df;border:1px solid #f0d58a;border-radius:12px;padding:12px;color:#6c5111;font-size:.9rem;margin-top:12px}
+footer{border-top:1px solid var(--line);padding:24px 16px;color:var(--muted);font-size:.85rem}.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}.foot a{color:inherit}
+@media(max-width:520px){header{padding-top:20px}.hero{margin-top:25px}.card{padding:17px}.tag{font-size:.75rem}}
+</style>
+</head>
+<body>
+<header>
+  <nav><div class="brand">📘 EstudiaFácil MX</div><a class="navlink" href="#mi-cuenta">Mi cuenta</a></nav>
+  <div class="hero">
+    <h1>Resuelve tus tareas<br>con menos complicaciones.</h1>
+    <p>Herramientas rápidas para estudiantes. Úsalas gratis desde tu celular y comprueba tus resultados paso a paso.</p>
+  </div>
+</header>
+<main>
+  <div class="adnote">Espacio reservado para anuncios. Los anuncios reales aparecerán solo después de configurar y obtener aprobación de una plataforma publicitaria.</div>
+  <h2 class="section-title">Herramientas de estudio</h2>
+  <p class="sub">Elige una herramienta, escribe tus datos y obtén el resultado al instante.</p>
+  <div class="grid">
+    <section class="card">
+      <h3>🧮 Calculadora de promedio</h3><p>Calcula el promedio de tus calificaciones.</p>
+      <label for="grades">Calificaciones (separadas por comas)</label><input id="grades" placeholder="Ej. 8, 9, 10, 7.5" inputmode="decimal">
+      <button onclick="average()">Calcular promedio</button><div class="result" id="avgResult" aria-live="polite">Tu resultado aparecerá aquí.</div>
+    </section>
+    <section class="card">
+      <h3>％ Calculadora de porcentaje</h3><p>Descubre cuánto representa un porcentaje de una cantidad.</p>
+      <label for="percent">Porcentaje (%)</label><input id="percent" type="number" placeholder="Ej. 15" inputmode="decimal">
+      <label for="amount">Cantidad</label><input id="amount" type="number" placeholder="Ej. 250" inputmode="decimal">
+      <button onclick="percentage()">Calcular porcentaje</button><div class="result" id="percentResult" aria-live="polite">Tu resultado aparecerá aquí.</div>
+    </section>
+    <section class="card">
+      <h3>🔢 Regla de tres simple</h3><p>Encuentra el valor que falta en una proporción.</p>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
+        <div><label for="ra">A</label><input id="ra" type="number" placeholder="Ej. 4"></div>
+        <div><label for="rb">B</label><input id="rb" type="number" placeholder="Ej. 12"></div>
+        <div><label for="rc">C</label><input id="rc" type="number" placeholder="Ej. 6"></div>
+        <div><label for="rd">D = ?</label><input value="?" disabled aria-label="Valor desconocido"></div>
+      </div>
+      <button onclick="rule3()">Calcular D</button><div class="result" id="ruleResult" aria-live="polite">A : B = C : D</div>
+      <div class="small">Se calcula D = (B × C) ÷ A.</div>
+    </section>
+    <section class="card">
+      <h3>✖️ Tabla de multiplicar</h3><p>Practica las tablas del 1 al 20.</p>
+      <label for="tableNum">Elige un número</label><input id="tableNum" type="number" min="1" max="20" value="7">
+      <button onclick="table()">Mostrar tabla</button><div class="result" id="tableResult" aria-live="polite">Aquí aparecerá tu tabla.</div>
+    </section>
+  </div>
+  <section class="card account" id="mi-cuenta">
+    <h2 style="margin:0 0 5px">👤 Mi cuenta</h2>
+    <p>Consulta tus ingresos y revisa cómo se retiran cuando la web esté conectada a una plataforma de anuncios.</p>
+    <div class="small">Saldo mostrado en esta versión de prueba</div>
+    <div class="balance">$0.00 MXN</div>
+    <div class="small">Este saldo es ilustrativo. La página aún no recibe datos reales de anuncios ni de pagos.</div>
+    <label for="withdrawAmount">Cantidad que deseas retirar (MXN)</label>
+    <input id="withdrawAmount" type="number" min="1" step="0.01" placeholder="Ej. 200">
+    <label for="withdrawMethod">Método de pago</label>
+    <select id="withdrawMethod"><option value="">Selecciona una opción</option><option value="transferencia">Transferencia bancaria</option><option value="plataforma">Método disponible en tu cuenta publicitaria</option></select>
+    <button onclick="withdrawRequest()">Revisar retiro</button>
+    <div class="result" id="withdrawResult" aria-live="polite">Aquí aparecerá la información del retiro.</div>
+    <div class="notice"><strong>Importante:</strong> este formulario no transfiere dinero ni guarda datos bancarios. Para recibir pagos reales debes configurar tu cuenta de pagos en la plataforma publicitaria (por ejemplo, AdSense), verificar tu identidad y alcanzar su mínimo de pago. No escribas aquí contraseñas, NIP ni números completos de tarjeta.</div>
+  </section>
+  <div class="adnote" style="margin-top:22px">¿Te sirvió? Comparte esta página con tus compañeros para que también aprovechen las herramientas.</div>
+  <h2 class="section-title">Aprende a tu ritmo</h2>
+  <p class="sub">Esta página es una primera versión. Añade guías originales, ejemplos explicados y ejercicios propios para que sea más útil y pueda aspirar a monetizarse.</p>
+</main>
+<footer><div class="foot"><span>© 2026 EstudiaFácil MX · Proyecto educativo independiente</span><span>Herramientas gratuitas para estudiar</span></div></footer>
+<script>
+function num(id){return Number(document.getElementById(id).value)}
+function show(id,msg){document.getElementById(id).textContent=msg}
+function fmt(n){return Number(n.toFixed(4)).toLocaleString('es-MX',{maximumFractionDigits:4})}
+function average(){let raw=document.getElementById('grades').value.trim();if(!raw){show('avgResult','Escribe al menos una calificación.');return}let a=raw.split(/[,\s;]+/).filter(Boolean).map(Number);if(!a.length||a.some(x=>!Number.isFinite(x)||x<0)){show('avgResult','Revisa las calificaciones. Usa números separados por comas.');return}show('avgResult','Promedio: '+fmt(a.reduce((s,x)=>s+x,0)/a.length))}
+function percentage(){let p=num('percent'),a=num('amount');if(document.getElementById('percent').value===''||document.getElementById('amount').value===''||!Number.isFinite(p)||!Number.isFinite(a)){show('percentResult','Completa ambos campos con números válidos.');return}show('percentResult',fmt(p)+'% de '+fmt(a)+' = '+fmt(p*a/100))}
+function rule3(){let a=num('ra'),b=num('rb'),c=num('rc');if(['ra','rb','rc'].some(id=>document.getElementById(id).value==='')||!Number.isFinite(a*b*c)||a===0){show('ruleResult','Completa A, B y C; A no puede ser cero.');return}show('ruleResult','D = '+fmt((b*c)/a))}
+function table(){let n=num('tableNum');if(document.getElementById('tableNum').value===''||!Number.isInteger(n)||n<1||n>20){show('tableResult','Elige un número entero del 1 al 20.');return}show('tableResult',Array.from({length:10},(_,i)=>`${n} × ${i+1} = ${n*(i+1)}`).join('   •   '))}
+function withdrawRequest(){let amount=Number(document.getElementById('withdrawAmount').value),method=document.getElementById('withdrawMethod').value;if(!Number.isFinite(amount)||amount<=0){show('withdrawResult','Escribe una cantidad válida para revisar.');return}if(!method){show('withdrawResult','Selecciona un método de pago para ver los siguientes pasos.');return}show('withdrawResult','La página todavía no está conectada a un sistema de pagos, así que no puede procesar retiros. Cuando tengas ingresos reales, solicita el pago desde la cuenta de la plataforma publicitaria y sigue sus requisitos y umbral mínimo.');}
+</script>
+</body>
+</html>
